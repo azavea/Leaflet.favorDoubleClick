@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet "Favor Double-Click" Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.ie.css" />
+        <![endif]-->
+</head>
+<body>
+    <div id="map" style="width: 600px; height: 400px; float: left; margin-right: 40px"></div>
+    <div style="font: 16pt sans-serif; margin-left: 600px">
+        <p><br/>1) Double-click to zoom the map, but hit the circle by mistake.<br/>With default Leaflet behavior, three events are handled:
+            <ul style="margin-left: 50px;">
+                <li>Click (on circle)&mdash;briefly raises popup "I am a circle".</li>
+                <li>Double-click (on map)&mdash;zooms in.</li>
+                <li>Click (on map)&mdash;raises popup "You clicked the map at ...".</li>
+            </ul>
+        </p>
+        <p>2) Close the popup and zoom back out.
+        <p>3) Click this checkbox to enable the plugin:</p>
+        <p style="padding-left: 60px"><label><input type="checkbox" onclick="enablePlugin(this.checked)"> Favor double-click</label></p>
+        <p>4) Try again&mdash;double-click the circle, intending to zoom the map. You zoom in as desired.</p>
+    </div>
+
+    <script src="leaflet_0.8-dev-src.js"></script>
+    <script src="../src/L.favorDoubleClick.js"></script>
+    <script>
+        function enablePlugin(shouldEnable) {
+            if (shouldEnable) {
+                L.favorDoubleClick.enable();
+            } else {
+                L.favorDoubleClick.disable();
+            }
+        }
+
+        var map = L.map('map', {closePopupOnClick: false}).setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'examples.map-i86knfo3'
+        }).addTo(map);
+
+        L.circle([51.505, -0.09], 1200, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5
+        }).addTo(map).bindPopup("I am a circle.");
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+    </script>
+</body>
+</html>
