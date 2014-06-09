@@ -10,19 +10,15 @@
         <![endif]-->
 </head>
 <body>
-    <div id="map" style="width: 600px; height: 400px; float: left; margin-right: 40px"></div>
-    <div style="font: 16pt sans-serif; margin-left: 600px">
-        <p><br/>1) Double-click to zoom the map, but hit the circle by mistake.<br/>With default Leaflet behavior, three events are handled:
-            <ul style="margin-left: 50px;">
-                <li>Click (on circle)&mdash;briefly raises popup "I am a circle".</li>
-                <li>Double-click (on map)&mdash;zooms in.</li>
-                <li>Click (on map)&mdash;raises popup "You clicked the map at ...".</li>
-            </ul>
-        </p>
+    <div id="map" style="width: 600px; height: 400px; float: left"></div>
+    <div style="font: 16pt sans-serif; margin-left: 620px">
+        <p>&nbsp;</p>
+        <p>1) Double-click to zoom the map, but hit the circle by mistake. You get two unwanted popups (one just briefly).</p>
         <p>2) Close the popup and zoom back out.
-        <p>3) Click this checkbox to enable the plugin:</p>
-        <p style="padding-left: 60px"><label><input type="checkbox" onclick="enablePlugin(this.checked)"> Favor double-click</label></p>
-        <p>4) Try again&mdash;double-click the circle, intending to zoom the map. You zoom in as desired.</p>
+        <p>3) <label><input type="checkbox" onclick="enablePlugin(this.checked)"> Click here to enable the plugin.</label></p>
+        <p>4) Try again&mdash;double-click to zoom the map, but hit the circle by mistake. You zoom in as desired.</p>
+        <p>5) Click on the circle. There is a short delay before the popup appears&mdash;that's the price of favoring double-click.</p>
+        <p>6) Close the popup and zoom back out. There is no delay for these clicks, because of the plugin's default blacklist.</p>
     </div>
 
     <script src="leaflet_0.8-dev-src.js"></script>

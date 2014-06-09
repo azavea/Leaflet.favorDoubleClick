@@ -1,11 +1,17 @@
 (function (L) {
     var _isEnabled = false,
-        _delay = 200;
+        _delay = 200,
+        _blacklist = [L.Control, L.Popup];
 
     L.favorDoubleClick = {
-        enable: function (delay) {
+        getDelay: function () { return _delay; }, 
+        setDelay: function (delay) { _delay = delay; }, 
+
+        getBlacklist: function () { return _blacklist; }, 
+        setBlacklist: function (blacklist) { _blacklist = blacklist; },
+
+        enable: function () {
             _isEnabled = true;
-            _delay = delay || _delay;
         },
 
         disable: function () {
@@ -42,7 +48,7 @@
 
         return function (event) {
             var context = this;
-            if (!_isEnabled) {
+            if (!shouldFavorDoubleClick(context)) {
                 clickHandler.call(context, event);
             } else {
                 clickCount++;
@@ -60,6 +66,21 @@
                 }
             }
         };
+    }
+
+    function shouldFavorDoubleClick(obj) {
+        return _isEnabled && !isKindOf(obj, _blacklist);
+    }
+
+    function isKindOf(obj, types) {
+        if (types) {
+            for (var i = 0, len = types.length; i < len; i++) {
+                if (obj instanceof types[i]) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     install();
