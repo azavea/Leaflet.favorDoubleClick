@@ -1,13 +1,13 @@
 Leaflet.favorDoubleClick
 ========================
 
-Leaflet plugin to favor double-click events over single-click events.
+A [Leaflet](https://github.com/Leaflet/Leaflet) plugin to favor double-click events over single-click events.
 
 How many times have you double-clicked a web map to zoom in, 
 but found that your action was also interpreted as a single-click on a feature? 
 So in addition to the zoom that you wanted you also now have a popup that you didn't want, and must close.
 
-That's because [Leaflet](https://github.com/Leaflet/Leaflet) favors single-click events over double-click events.
+That's because Leaflet favors single-click events over double-click events.
 This plugin allows enabling the reverse behavior where double-click events are favored over single-click events.
 
 *Requires Leaflet 0.8.0 or newer.*
