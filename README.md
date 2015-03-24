@@ -10,7 +10,7 @@ So in addition to the zoom that you wanted you also now have a popup that you di
 That's because Leaflet favors single-click events over double-click events.
 This plugin allows enabling the reverse behavior where double-click events are favored over single-click events.
 
-*Requires Leaflet 0.8.0 or newer.*
+*Requires Leaflet 1.0 or newer.*
 
 ## Demo
 
@@ -46,7 +46,7 @@ L.favorDoubleClick.setDelay(300);
 
 ## Blacklist
 
-The cost of favoring double-clicks is a short delay when handling a single-click. 
+The cost of favoring double-clicks is a slight delay when handling a single-click. 
 For many operations the delay isn't noticable, but for others it is both noticable and unnecessary.
 For example, when clicking the `-` button to zoom out or clicking a popup's `X` to close it you'd
 rather not have a delay. Since you're unlikely to hit these controls when trying to double-click something else,

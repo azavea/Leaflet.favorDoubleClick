@@ -4,7 +4,7 @@
     <title>Leaflet "Favor Double-Click" Example</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="leaflet_1.0-dev.css" />
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.ie.css" />
         <![endif]-->
@@ -17,11 +17,11 @@
         <p>2) Close the popup and zoom back out.
         <p>3) <label><input type="checkbox" onclick="enablePlugin(this.checked)"> Click here to enable the plugin.</label></p>
         <p>4) Try again&mdash;double-click to zoom the map, but hit the circle by mistake. You zoom in as desired.</p>
-        <p>5) Click on the circle. There is a short delay before the popup appears&mdash;that's the price of favoring double-click.</p>
+        <p>5) Click on the circle. There is a slight delay before the popup appears&mdash;that's the price of favoring double-click.</p>
         <p>6) Close the popup and zoom back out. There is no delay for these clicks, because of the plugin's default blacklist.</p>
     </div>
 
-    <script src="leaflet_0.8-dev-src.js"></script>
+    <script src="leaflet-src_1.0-dev.js"></script>
     <script src="../src/L.favorDoubleClick.js"></script>
     <script>
         function enablePlugin(shouldEnable) {
@@ -39,7 +39,7 @@
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
                 '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
                 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            id: 'examples.map-i86knfo3'
+			id: 'examples.map-i875mjb7'
         }).addTo(map);
 
         L.circle([51.505, -0.09], 1200, {

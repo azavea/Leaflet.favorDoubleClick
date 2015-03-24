@@ -24,6 +24,9 @@
     };
 
     function install() {
+        // Wrap Leaflet's event handler creators.
+        // Referencing _on is fragile, but Leaflet calls _on to
+        // create handlers we need to wrap so we have no choice.
         var domEvent_on = L.DomEvent._on,
             evented_on = L.Evented._on;
 
