@@ -24,6 +24,9 @@
     };
 
     function install() {
+        // Wrap Leaflet's event handler creators.
+        // Referencing _on is fragile, but Leaflet calls _on to
+        // create handlers we need to wrap so we have no choice.
         var domEvent_on = L.DomEvent._on,
             evented_on = L.Evented._on;
 
@@ -31,14 +34,14 @@
             if (type === 'click') {
                 fn = makeSingleNotMultiClickHandler(fn);
             }
-            domEvent_on(obj, type, fn, context);
+            return domEvent_on(obj, type, fn, context);
         };
 
         L.Evented._on = function (type, fn, context) {
             if (type === 'click') {
                 fn = makeSingleNotMultiClickHandler(fn);
             }
-            evented_on(type, fn, context);
+            return evented_on(type, fn, context);
         };
     }
 
