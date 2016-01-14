@@ -59,14 +59,12 @@
                     clearTimeout(timeoutId);
                 }
                 L.DomEvent.stopPropagation(event);
-                timeoutId = setTimeout(onClicksFinished, _delay);
-
-                function onClicksFinished() {
+                timeoutId = setTimeout(function onClicksFinished() {
                     if (clickCount === 1) {
                         clickHandler.call(context, event);
                     }
                     clickCount = 0;
-                }
+                }, _delay);
             }
         };
     }
