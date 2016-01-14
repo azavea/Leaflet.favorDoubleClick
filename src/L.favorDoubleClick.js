@@ -4,10 +4,10 @@
         _blacklist = [L.Control, L.Popup];
 
     L.favorDoubleClick = {
-        getDelay: function () { return _delay; }, 
-        setDelay: function (delay) { _delay = delay; }, 
+        getDelay: function () { return _delay; },
+        setDelay: function (delay) { _delay = delay; },
 
-        getBlacklist: function () { return _blacklist; }, 
+        getBlacklist: function () { return _blacklist; },
         setBlacklist: function (blacklist) { _blacklist = blacklist; },
 
         enable: function () {
