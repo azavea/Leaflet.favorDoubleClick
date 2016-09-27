@@ -24,25 +24,44 @@
     };
 
     function install() {
-        // Wrap Leaflet's event handler creators.
-        // Referencing _on is fragile, but Leaflet calls _on to
-        // create handlers we need to wrap so we have no choice.
+        // This plugin references internal Leaflet properties because I
+        // could see no other way to make it work.
+        // 
+        // We want to prevent click handlers from executing if a double-click
+        // is detected. We override _on(), which creates those handlers,
+        // modifying the handler to check for double-clicks. We set _leaflet_id
+        // on the unmodified handler so it can be removed with off().
+
+        // Wrap Leaflet's event handler creators
         var domEvent_on = L.DomEvent._on,
             evented_on = L.Evented._on;
 
         L.DomEvent._on = function (obj, type, fn, context) {
-            if (type === 'click') {
-                fn = makeSingleNotMultiClickHandler(fn);
+            return wrapClickHandler(type, fn, leaflet_on);
+
+            function leaflet_on(fn) {
+                return domEvent_on(obj, type, fn, context);
             }
-            return domEvent_on(obj, type, fn, context);
         };
 
         L.Evented._on = function (type, fn, context) {
-            if (type === 'click') {
-                fn = makeSingleNotMultiClickHandler(fn);
+            return wrapClickHandler(type, fn, leaflet_on);
+
+            function leaflet_on(fn) {
+                return evented_on(type, fn, context);
             }
-            return evented_on(type, fn, context);
         };
+
+        function wrapClickHandler(type, fn, leaflet_on) {
+            if (type === 'click') {
+                var wrappedFn = makeSingleNotMultiClickHandler(fn),
+                    ret = leaflet_on(wrappedFn);
+                fn._leaflet_id = wrappedFn._leaflet_id;  // otherwise off() fails
+                return ret;
+            } else {
+                return leaflet_on(fn);
+            }
+        }
     }
 
     function makeSingleNotMultiClickHandler(clickHandler) {
