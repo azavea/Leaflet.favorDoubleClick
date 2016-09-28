@@ -10,7 +10,7 @@ So in addition to the zoom that you wanted you also now have a popup that you di
 That's because Leaflet favors single-click events over double-click events.
 This plugin allows enabling the reverse behavior where double-click events are favored over single-click events.
 
-*Requires Leaflet 1.0 Beta 2 or newer.*
+*Requires Leaflet 1.0*
 
 ## Demo
 
